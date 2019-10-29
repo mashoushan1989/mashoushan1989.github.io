@@ -14,13 +14,11 @@ PPLabs坚持把边缘计算从概念做到商业化落地，有效连接云，�
 <br/>
 PPIO 是 PPLabs 旗下第一个产品，是为开发者打造的去中心化存储与分发平台，让数据更便宜、更高速、更隐私。
 <br/>
-ENFI是基于PPIO平台孵化的应用，为互联网用户提供大文件内容（如视频、游戏等）的高速下载体验，为企业提供极具性价比的超高速全球内容分发系统。
-<br/>
+
 - [公司领英主页]( https://www.linkedin.com/company/pplabs/?ash)
 - [PPIO 项目官网](https://www.pp.io/?ash)
 - [项目白皮书（英文)](https://github.com/PPIO/Whitepaper/?ash)
 - [PPIO在知乎](https://www.zhihu.com/org/ppio-62/activities/?ash)
-- [ENFI项目官网](http://www.enfi.cloud/#/)
 
 #### 董事长：姚欣
 - PPTV 创始人
@@ -44,7 +42,7 @@ ENFI是基于PPIO平台孵化的应用，为互联网用户提供大文件内容
 
 <hr/>
 
-**公司地址：** 上海浦东新区博霞路81号J座3楼<br/>
+**公司地址：** 上海浦东新区亮秀路112号Y1座9楼910室<br/>
 近2号线金科路<br/>
 
 <hr>
