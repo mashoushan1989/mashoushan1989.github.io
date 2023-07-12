@@ -87,7 +87,7 @@ tags: [非招聘内容]
 <hr>
 
 #### [关于办公环境及团队日常照片](https://www.ashma.info/2019/03/02/pic-of-PPLabs/)
-#### [研发岗位招聘](https://www.ashma.info/2022/05/24/RD-positions/)
+#### [研发岗位招聘](https://www.ashma.info/2023-07-12-RD-positions/)
 #### [产品岗位招聘](https://www.ashma.info/2022/05/24/Product-Position/)
 
 <hr>
