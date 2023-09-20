@@ -14,6 +14,10 @@ tags: [非招聘内容]
 **[如遇加载缓慢无法阅读，可点此直接下载](https://ashma.info/assets/pdfs/Microsoft-GPT-reserch.pdf)**
 <br>
 
+<hr>
+
+**在线预览：**
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
