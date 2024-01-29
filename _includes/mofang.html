@@ -1,107 +1,98 @@
 <!DOCTYPE html>
 <html lang="zh" dir="ltr">
-
 <head>
-  <meta charset="utf-8">
-  <title></title>
-  <style type="text/css">
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      opacity: 0.8;
-      width: 50px;
-      height: 50px;
-      position: fixed;
-      left: 15px;
-      bottom: 22px;
-      z-index: 10;
-    }
+ <meta charset="utf-8">
+ <title>3D Box Rotation</title>
+ <style type="text/css">
+   * {
+     margin: 0;
+     padding: 0;
+   }
+   .container {
+     opacity: 0.9;
+     width: 50px;
+     height: 50px;
+     position: fixed;
+     left: 15px;
+     bottom: 22px;
+     z-index: 10;
+   }
+   .box {
+     width: 50px;
+     height: 50px;
+     text-align: center;
+     line-height: 25px;
+     transform-style: preserve-3d;
+     animation: ro 15s linear infinite;
+     transition: opacity 0.5s ease;
+   }
+   @keyframes ro {
+     0% {
+       transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+     }
+     100% {
+       transform: rotateX(720deg) rotateY(360deg) rotateZ(-720deg);
+     }
+   }
+   .box-page {
+     width: 50px;
+     height: 50px;
+     border: 1px solid #000;
+     background-color: rgba(255, 255, 255, 0.8);
+     position: absolute;
+     transition: transform 0.3s ease, background-color 0.5s ease;
+   }
 
-    .box {
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      line-height: 25px;
-      /* 控制子元素保持3D转换 */
-      transform-style: preserve-3d;
-      /* 测试代码 */
-      /* transform: rotateX(45deg) rotateY(45deg); */
-      animation: ro 10s linear infinite;
-    }
+   .top {
+     transform: rotateX(90deg) translateZ(25px);
+   }
+   .bottom {
+     transform: rotateX(-90deg) translateZ(25px);
+   }
+   .left {
+     transform: rotateY(-90deg) translateZ(25px);
+   }
+   .right {
+     transform: rotateY(90deg) translateZ(25px);
+   }
+   .before {
+     transform: translateZ(25px);
+   }
+   .back {
+     transform: rotateY(180deg) translateZ(25px);
+   }
 
-    @keyframes ro {
-      0% {
-        transform: rotateX(0deg) rotateZ(0deg) rotateZ(0deg);
-      }
+   .box:hover {
+     animation-play-state: paused;
+   }
 
-      100% {
-        transform: rotateX(720deg) rotateZ(360deg) rotateZ(-720deg);
-      }
-    }
-
-    .box-page {
-      width: 50px;
-      height: 50px;
-      border: 1px solid #000;
-      background-color: white;
-      /* 位置初始化 */
-      position: absolute;
-      transform-style: preserve-3d;
-      transition: transform 0.3s ease; /* 添加过渡效果 */
-    }
-
-    .top,
-    .bottom,
-    .left,
-    .right,
-    .before,
-    .back {
-      transition: transform 0.3s ease; /* 添加过渡效果 */
-    }
-
-    .box:hover {
-      /* 鼠标悬停时停止立方体旋转 */
-      animation-play-state: paused;
-    }
-
-    .text {
-      font-size: 14px;
-      color: #000000;
-      text-decoration: none;
-    }
-
-    .text:hover {
-      color: red;
-      font-size: 101%;
-      text-decoration: none;
-    }
-  </style>
+   .text {
+     font-size: 14px;
+     color: #333333;
+     text-decoration: none;
+     transition: color 0.3s ease;
+   }
+   .text:hover {
+     color: red;
+     font-size: 80%;
+     text-decoration: underline;
+   }
+ </style>
 </head>
 
-<body>
-  <!-- 容器 -->
-  <div class="container">
-    <div class="box">
-      <div class="box-page top"><a class="text" href="https://clipdrop.co/stable-diffusion">AI生图clipdrop</a></div>
-      <div class="box-page bottom"><a class="text" href="https://github.com/public-apis/public-apis">Public APIs</a></div>
-      <div class="box-page left"><a class="text" href="https://www.xinrenxinshi.com/calculator">免费工资计算器</a></div>
-      <div class="box-page right"><a class="text" href="https://china.workingdays.org/#showcalendar">工作日计算器</a></div>
-      <div class="box-page before"><a class="text" href="https://learngitbranching.js.org/">学习Git</a></div>
-      <div class="box-page back"><a class="text" href="https://github.com/github/personal-website">自建静态网站</a></div>
-    </div>
-  </div>
-  <script type="text/javascript">
-    var arr = document.querySelectorAll(".box-page");
 
-    // 遍历每个面
-    for (var n = 0; n < arr.length; n++) {
-      var divs = document.createElement("div");
-      divs.style.cssText = "width:50px;height:50px;box-sizing:border-box;background-size:50px 50px;position:absolute;";
-      arr[n].appendChild(divs);
-    }
-  </script>
+<body>
+ <!-- 容器 -->
+ <div class="container">
+   <div class="box">
+     <div class="box-page top"><a class="text" href="https://clipdrop.co/stable-diffusion">AI生图clipdrop</a></div>
+     <div class="box-page bottom"><a class="text" href="https://github.com/public-apis/public-apis">Public APIs</a></div>
+     <div class="box-page left"><a class="text" href="https://chatglm.cn/main/alltoolsdetail">Ai助手</a></div>
+     <div class="box-page right"><a class="text" href="https://china.workingdays.org/#showcalendar">工作日计算器</a></div>
+     <div class="box-page before"><a class="text" href="https://learngitbranching.js.org/">学习Git</a></div>
+     <div class="box-page back"><a class="text" href="https://github.com/github/personal-website">自建静态网站</a></div>
+   </div>
+ </div>
 </body>
 
 </html>
