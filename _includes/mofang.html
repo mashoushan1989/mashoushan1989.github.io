@@ -10,7 +10,7 @@
       padding: 0;
     }
     .container {
-      opacity:0.8;
+      opacity: 0.8;
       width: 50px;
       height: 50px;
       position: fixed;
@@ -29,79 +29,49 @@
       /* 测试代码 */
       /* transform: rotateX(45deg) rotateY(45deg); */
       animation: ro 10s linear infinite;
-
     }
 
     @keyframes ro {
       0% {
-        transform: rotateX(0deg) rotateZ(0deg)rotateZ(0deg);
+        transform: rotateX(0deg) rotateZ(0deg) rotateZ(0deg);
       }
 
       100% {
-        transform: rotateX(720deg) rotateZ(360deg)rotateZ(-720deg);
+        transform: rotateX(720deg) rotateZ(360deg) rotateZ(-720deg);
       }
     }
 
     .box-page {
       width: 50px;
       height: 50px;
-      border : 1px solid #000;
+      border: 1px solid #000;
       background-color: white;
       /* 位置初始化 */
       position: absolute;
       transform-style: preserve-3d;
+      transition: transform 0.3s ease; /* 添加过渡效果 */
     }
 
-    .top {
-      /* background-color: red; */
-      transform: translateZ(25px);
+    .top:hover,
+    .bottom:hover,
+    .left:hover,
+    .right:hover,
+    .before:hover,
+    .back:hover {
+      transform: none; /* 鼠标悬停时停止旋转 */
     }
 
-    .bottom {
-      /* background-color: yellow; */
-      transform: translateZ(-25px) rotateX(180deg);
-    }
-
-    .left {
-      /* background-color: blue; */
-      transform: translateX(-25px) rotateY(90deg);
-    }
-
-    .right {
-      /* background-color: green; */
-      transform: translateX(25px) rotateY(90deg);
-    }
-
-    .before {
-      /* background-color: gray; */
-      transform: translateY(25px) rotateX(-90deg);
-    }
-
-    .back {
-      /* background-color: orange; */
-      transform: translateY(-25px) rotateX(90deg);
-    }
-    .text{
+    .text {
       font-size: 14px;
-    }
-    .text:link {
-    color: #000000;
-    text-decoration: none
-    }
-    .text:visited {
-    color: #000000;
-    text-decoration: none
-    }
-    .text:hover {
-    color: red;
-    font-size: 101%;
-    text-decoration: none;
-    }
-    .text:active {
-    color: #ff7f24;
-    text-decoration: none;
+      color: #000000;
+      text-decoration: none;
     }
 
+    .text:hover {
+      color: red;
+      font-size: 101%;
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -119,12 +89,30 @@
   </div>
   <script type="text/javascript">
     var arr = document.querySelectorAll(".box-page");
+
     // 遍历每个面
     for (var n = 0; n < arr.length; n++) {
       var divs = document.createElement("div");
       divs.style.cssText = "width:50px;height:50px;box-sizing:border-box;background-size:50px 50px;position:absolute;";
       arr[n].appendChild(divs);
     }
+
+    // 获取立方体
+    var cube = document.querySelector(".box");
+
+    // 鼠标悬停时停止旋转
+    cube.addEventListener("mouseenter", function () {
+      for (var i = 0; i < arr.length; i++) {
+        arr[i].style.transform = "none";
+      }
+    });
+
+    // 鼠标移开后继续旋转
+    cube.addEventListener("mouseleave", function () {
+      for (var i = 0; i < arr.length; i++) {
+        arr[i].style.transform = "";
+      }
+    });
   </script>
 </body>
 
