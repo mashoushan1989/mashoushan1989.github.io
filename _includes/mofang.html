@@ -52,13 +52,18 @@
       transition: transform 0.3s ease; /* 添加过渡效果 */
     }
 
-    .top:hover,
-    .bottom:hover,
-    .left:hover,
-    .right:hover,
-    .before:hover,
-    .back:hover {
-      transform: none; /* 鼠标悬停时停止旋转 */
+    .top,
+    .bottom,
+    .left,
+    .right,
+    .before,
+    .back {
+      transition: transform 0.3s ease; /* 添加过渡效果 */
+    }
+
+    .box:hover {
+      /* 鼠标悬停时停止立方体旋转 */
+      animation-play-state: paused;
     }
 
     .text {
@@ -96,23 +101,6 @@
       divs.style.cssText = "width:50px;height:50px;box-sizing:border-box;background-size:50px 50px;position:absolute;";
       arr[n].appendChild(divs);
     }
-
-    // 获取立方体
-    var cube = document.querySelector(".box");
-
-    // 鼠标悬停时停止旋转
-    cube.addEventListener("mouseenter", function () {
-      for (var i = 0; i < arr.length; i++) {
-        arr[i].style.transform = "none";
-      }
-    });
-
-    // 鼠标移开后继续旋转
-    cube.addEventListener("mouseleave", function () {
-      for (var i = 0; i < arr.length; i++) {
-        arr[i].style.transform = "";
-      }
-    });
   </script>
 </body>
 
