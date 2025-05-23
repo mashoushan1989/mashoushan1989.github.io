@@ -19,7 +19,7 @@
 {% endif %}
 
 <!doctype html>
-<html class="min-height-full">
+<html class="min-height-full {% if site.style == 'dark' %}theme-dark{% endif %}">
   <head>
     <meta charset="utf-8">
     <title>Ash在招聘-PPIO/PPLabs</title>
@@ -50,5 +50,168 @@
       gtag('config', 'UA-138967165-1');
     </script>
     <link href="{{ "/assets/styles.css" | relative_url }}" rel="stylesheet" type="text/css">
+    
+    <!-- 主题切换按钮样式 -->
+    <style>
+      .theme-switch-wrapper {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s;
+        opacity: 0.7;
+      }
+      
+      .theme-switch-wrapper:hover {
+        opacity: 1;
+      }
+      
+      .theme-switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+      }
+      
+      .theme-switch input {
+        display: none;
+      }
+      
+      .slider {
+        background-color: #ccc;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .4s;
+        border-radius: 34px;
+      }
+      
+      .slider:before {
+        background-color: white;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: .4s;
+        width: 26px;
+        border-radius: 50%;
+      }
+      
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+      
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+      
+      .theme-icon {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+      
+      @media (max-width: 768px) {
+        .theme-switch-wrapper {
+          top: 10px;
+          right: 10px;
+        }
+        
+        .theme-switch {
+          height: 28px;
+          width: 50px;
+        }
+        
+        .slider:before {
+          height: 20px;
+          width: 20px;
+        }
+        
+        input:checked + .slider:before {
+          transform: translateX(22px);
+        }
+      }
+      
+      @media (max-width: 500px) {
+        .theme-switch-wrapper {
+          top: 50px; /* 避免与导航栏重叠 */
+        }
+      }
+      
+      /* 添加平滑过渡效果 */
+      body, a, p, h1, h2, h3, h4, h5, h6, .bg-white, .bg-gray-dark {
+        transition: background-color 0.3s, color 0.3s;
+      }
+      
+      /* 支持全局主题类 */
+      html.theme-dark {
+        background-color: #2f363d;
+        color: #ffffff;
+      }
+      
+      /* 确保主题切换时按钮视觉效果更一致 */
+      .dark-button {
+        background-color: #4a4a4a !important;
+        color: #ffffff !important;
+        border-color: #666 !important;
+      }
+      
+      .theme-dark .slider {
+        background-color: #555;
+      }
+
+      .theme-dark .pagination a,
+      .theme-dark .site-title,
+      .theme-dark .site-nav,
+      .theme-dark .post-list-heading {
+        color: #ffffff !important;
+      }
+
+      .theme-dark img {
+        filter: brightness(0.9); /* 让图片在暗色模式下稍微暗一点 */
+      }
+
+      /* 确保按钮不会遮挡重要内容 */
+      @media (max-width: 400px) {
+        .theme-switch-wrapper {
+          top: auto;
+          bottom: 20px;
+          right: 20px;
+        }
+      }
+
+      /* 确保字体在不同主题下保持一致的视觉重量 */
+      .theme-dark {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
   </head>
   <body class="bg-white min-height-full" {% if site.style == 'dark' %}style="background-color: #2f363d !important"{% endif %}>
+  
+  <!-- 主题切换按钮 -->
+  <div class="theme-switch-wrapper">
+    <span class="theme-icon">☀/☾</span>
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" {% if site.style == 'dark' %}checked{% endif %}>
+      <div class="slider"></div>
+    </label>
+  </div>
+
+  <!-- 只保留这部分，移除其他脚本定义 -->
+  <script>
+    // 防止主题闪烁
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('theme-dark');
+        document.body.style.backgroundColor = "#2f363d";
+      }
+    })();
+  </script>
