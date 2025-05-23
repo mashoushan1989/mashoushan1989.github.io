@@ -51,8 +51,88 @@
     </script>
     <link href="{{ "/assets/styles.css" | relative_url }}" rel="stylesheet" type="text/css">
     
-    <!-- 主题切换按钮样式 -->
+    <!-- 主题切换按钮样式和颜色变量 -->
     <style>
+      /* 定义根变量 - 浅色主题默认值 */
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f6f8fa;
+        --text-primary: #24292e;
+        --text-secondary: #586069;
+        --link-color: #0366d6;
+        --border-color: #e1e4e8;
+        --button-bg: #fafbfc;
+        --button-text: #24292e;
+        --code-bg: #f6f8fa;
+        --code-text: #24292e;
+      }
+      
+      /* 深色主题变量 */
+      html.theme-dark {
+        --bg-primary: #2f363d;
+        --bg-secondary: #24292e;
+        --text-primary: #ffffff;
+        --text-secondary: #d1d5da;
+        --link-color: #58a6ff;
+        --border-color: #444d56;
+        --button-bg: #444d56;
+        --button-text: #ffffff;
+        --code-bg: #1f2428;
+        --code-text: #e6e6e6;
+      }
+      
+      /* 应用变量到元素 */
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      
+      a:not(.btn) {
+        color: var(--link-color);
+      }
+      
+      p, span {
+        color: var(--text-primary);
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        color: var(--text-primary);
+      }
+      
+      .bg-white {
+        background-color: var(--bg-primary) !important;
+      }
+      
+      .bg-gray-dark {
+        background-color: var(--bg-secondary) !important;
+      }
+      
+      pre, code {
+        background-color: var(--code-bg);
+        color: var(--code-text);
+        border-color: var(--border-color);
+      }
+      
+      button, .btn {
+        background-color: var(--button-bg);
+        color: var(--button-text);
+        border-color: var(--border-color);
+      }
+      
+      table, th, td {
+        border-color: var(--border-color);
+      }
+      
+      blockquote {
+        border-left-color: var(--border-color);
+        color: var(--text-secondary);
+      }
+      
+      .text-gray {
+        color: var(--text-secondary) !important;
+      }
+      
+      /* 切换按钮样式 */
       .theme-switch-wrapper {
         position: fixed;
         top: 20px;
@@ -115,6 +195,7 @@
       .theme-icon {
         margin-right: 10px;
         font-size: 20px;
+        color: var(--text-primary);
       }
       
       @media (max-width: 768px) {
@@ -152,23 +233,16 @@
         }
       }
       
-      /* 添加平滑过渡效果 */
-      body, a, p, h1, h2, h3, h4, h5, h6, .bg-white, .bg-gray-dark {
-        transition: background-color 0.3s, color 0.3s;
+      /* 强制高对比度 */
+      .theme-dark .text-gray {
+        color: #d1d5da !important; /* 比默认的灰色更亮 */
       }
       
-      /* 支持全局主题类 */
-      html.theme-dark {
-        background-color: #2f363d !important;
-        color: #ffffff !important;
+      .theme-dark a:not(.btn) {
+        color: #58a6ff !important; /* 明亮的蓝色链接 */
       }
       
-      body.theme-dark {
-        background-color: #2f363d !important;
-        color: #ffffff !important;
-      }
-      
-      /* 确保文本在深色主题下可见 */
+      /* 确保所有字体颜色有足够对比度 */
       .theme-dark p, 
       .theme-dark h1, 
       .theme-dark h2, 
@@ -178,70 +252,26 @@
       .theme-dark h6, 
       .theme-dark span, 
       .theme-dark li,
-      .theme-dark td,
-      .theme-dark th,
-      .theme-dark blockquote,
       .theme-dark label {
         color: #ffffff !important;
       }
       
-      /* 特殊处理链接颜色 */
-      .theme-dark a:not(.btn) {
-        color: #58a6ff !important;
+      /* 强制处理页面上任何可能被遗漏的元素 */
+      html.theme-dark * {
+        --text-color-fallback: #ffffff; /* 兜底文本颜色 */
       }
       
-      /* 确保主题切换时按钮视觉效果更一致 */
-      .dark-button {
-        background-color: #4a4a4a !important;
-        color: #ffffff !important;
-        border-color: #666 !important;
+      html.theme-dark *:not(a):not(button):not(.btn):not([class*="bg-"]):not(code):not(pre) {
+        color: var(--text-primary, var(--text-color-fallback)) !important;
       }
       
-      .theme-dark .slider {
-        background-color: #555;
+      html.theme-dark [class*="bg-"] {
+        background-color: var(--bg-primary) !important;
       }
       
-      /* 确保背景元素在深色主题下正确显示 */
-      .theme-dark .bg-white, 
-      .theme-dark .border, 
-      .theme-dark .markdown-body, 
-      .theme-dark .highlight, 
-      .theme-dark pre, 
-      .theme-dark code, 
-      .theme-dark section, 
-      .theme-dark header, 
-      .theme-dark footer, 
-      .theme-dark nav, 
-      .theme-dark .container, 
-      .theme-dark .content, 
-      .theme-dark main, 
-      .theme-dark aside {
-        background-color: #2f363d !important;
-        border-color: #444 !important;
-      }
-      
-      /* 代码块特殊处理 */
-      .theme-dark pre, 
-      .theme-dark code {
-        background-color: #1f2428 !important;
-        color: #e6e6e6 !important;
-      }
-      
-      /* 表格特殊处理 */
-      .theme-dark table,
-      .theme-dark th,
-      .theme-dark td {
-        border-color: #444 !important;
-      }
-      
-      /* 引用块特殊处理 */
-      .theme-dark blockquote {
-        border-left-color: #444 !important;
-      }
-      
-      /* 图片处理 */
-      .theme-dark img {
-        filter: brightness(0.9);
+      /* 去除所有过渡效果，实现即时切换，避免不同步问题 */
+      * {
+        transition: none !important;
       }
     </style>
     
@@ -257,7 +287,7 @@
       })();
     </script>
   </head>
-  <body class="{% if site.style == 'dark' %}theme-dark bg-gray-dark{% else %}bg-white{% endif %}" {% if site.style == 'dark' %}style="background-color: #2f363d !important; color: #ffffff !important;"{% endif %}>
+  <body class="{% if site.style == 'dark' %}theme-dark{% else %}{% endif %} min-height-full">
   
   <!-- 主题切换按钮 -->
   <div class="theme-switch-wrapper">
