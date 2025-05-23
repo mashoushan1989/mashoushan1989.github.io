@@ -144,6 +144,14 @@
         }
       }
       
+      @media (max-width: 400px) {
+        .theme-switch-wrapper {
+          top: auto;
+          bottom: 20px;
+          right: 20px;
+        }
+      }
+      
       /* 添加平滑过渡效果 */
       body, a, p, h1, h2, h3, h4, h5, h6, .bg-white, .bg-gray-dark {
         transition: background-color 0.3s, color 0.3s;
@@ -151,8 +159,35 @@
       
       /* 支持全局主题类 */
       html.theme-dark {
-        background-color: #2f363d;
-        color: #ffffff;
+        background-color: #2f363d !important;
+        color: #ffffff !important;
+      }
+      
+      body.theme-dark {
+        background-color: #2f363d !important;
+        color: #ffffff !important;
+      }
+      
+      /* 确保文本在深色主题下可见 */
+      .theme-dark p, 
+      .theme-dark h1, 
+      .theme-dark h2, 
+      .theme-dark h3, 
+      .theme-dark h4, 
+      .theme-dark h5, 
+      .theme-dark h6, 
+      .theme-dark span, 
+      .theme-dark li,
+      .theme-dark td,
+      .theme-dark th,
+      .theme-dark blockquote,
+      .theme-dark label {
+        color: #ffffff !important;
+      }
+      
+      /* 特殊处理链接颜色 */
+      .theme-dark a:not(.btn) {
+        color: #58a6ff !important;
       }
       
       /* 确保主题切换时按钮视觉效果更一致 */
@@ -165,35 +200,64 @@
       .theme-dark .slider {
         background-color: #555;
       }
-
-      .theme-dark .pagination a,
-      .theme-dark .site-title,
-      .theme-dark .site-nav,
-      .theme-dark .post-list-heading {
-        color: #ffffff !important;
+      
+      /* 确保背景元素在深色主题下正确显示 */
+      .theme-dark .bg-white, 
+      .theme-dark .border, 
+      .theme-dark .markdown-body, 
+      .theme-dark .highlight, 
+      .theme-dark pre, 
+      .theme-dark code, 
+      .theme-dark section, 
+      .theme-dark header, 
+      .theme-dark footer, 
+      .theme-dark nav, 
+      .theme-dark .container, 
+      .theme-dark .content, 
+      .theme-dark main, 
+      .theme-dark aside {
+        background-color: #2f363d !important;
+        border-color: #444 !important;
       }
-
+      
+      /* 代码块特殊处理 */
+      .theme-dark pre, 
+      .theme-dark code {
+        background-color: #1f2428 !important;
+        color: #e6e6e6 !important;
+      }
+      
+      /* 表格特殊处理 */
+      .theme-dark table,
+      .theme-dark th,
+      .theme-dark td {
+        border-color: #444 !important;
+      }
+      
+      /* 引用块特殊处理 */
+      .theme-dark blockquote {
+        border-left-color: #444 !important;
+      }
+      
+      /* 图片处理 */
       .theme-dark img {
-        filter: brightness(0.9); /* 让图片在暗色模式下稍微暗一点 */
-      }
-
-      /* 确保按钮不会遮挡重要内容 */
-      @media (max-width: 400px) {
-        .theme-switch-wrapper {
-          top: auto;
-          bottom: 20px;
-          right: 20px;
-        }
-      }
-
-      /* 确保字体在不同主题下保持一致的视觉重量 */
-      .theme-dark {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        filter: brightness(0.9);
       }
     </style>
+    
+    <!-- 防止主题闪烁 -->
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('theme-dark');
+        } else if (savedTheme === 'light') {
+          document.documentElement.classList.remove('theme-dark');
+        }
+      })();
+    </script>
   </head>
-  <body class="bg-white min-height-full" {% if site.style == 'dark' %}style="background-color: #2f363d !important"{% endif %}>
+  <body class="{% if site.style == 'dark' %}theme-dark bg-gray-dark{% else %}bg-white{% endif %}" {% if site.style == 'dark' %}style="background-color: #2f363d !important; color: #ffffff !important;"{% endif %}>
   
   <!-- 主题切换按钮 -->
   <div class="theme-switch-wrapper">
@@ -203,15 +267,3 @@
       <div class="slider"></div>
     </label>
   </div>
-
-  <!-- 只保留这部分，移除其他脚本定义 -->
-  <script>
-    // 防止主题闪烁
-    (function() {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('theme-dark');
-        document.body.style.backgroundColor = "#2f363d";
-      }
-    })();
-  </script>
