@@ -8,6 +8,14 @@ plugins:
 
 permalink: /:year/:month/:day/:title/
 
+# 安全设置
+safe: true
+strict_front_matter: true
+whitelist:
+  - jekyll-octicons
+  - jekyll-github-metadata
+  - jemoji
+
 defaults:
   -
     scope:
